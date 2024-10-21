@@ -21,9 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className={`antialiased ${spaceGrotesk.className}`}>
+      <body className={`antialiased ${spaceGrotesk.className} flex`}>
         <Sidebar />
-        {children}
+        <main className="mt-24 md:mt-4">{children}</main>
       </body>
     </html>
   );

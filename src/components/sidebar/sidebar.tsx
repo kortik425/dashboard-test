@@ -58,6 +58,10 @@ const Navbar = ({}) => {
           })}
         </ul>
       </aside>
+      <div
+        aria-hidden
+        className={`block w-4 ${toggle ? "md:w-96" : "md:w-24"} transition-all relative h-1`}
+      />
     </>
   );
 };
