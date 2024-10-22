@@ -24,7 +24,7 @@ const Navbar = ({}) => {
     <>
       <button
         onClick={handleToggler}
-        className="absolute border rounded-lg top-5 left-5"
+        className={`absolute border rounded-lg top-5 left-5 ${toggle ? "md:invisible visible" : "md:visible invisible"}`}
         aria-label="toggle-open"
       >
         <BiMenu size={32} className="m-2" />
