@@ -1,7 +1,7 @@
 import { User } from "../interfaces/user";
 import { Post } from "../interfaces/post";
 
-export async function getUserList(): Promise<User[]> {
+export async function fetchUserList(): Promise<User[]> {
   let users: User[] = [];
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/users", {
@@ -18,7 +18,7 @@ export async function getUserList(): Promise<User[]> {
   return users;
 }
 
-export async function getPostList(userId?: number): Promise<Post[]> {
+export async function fetchPostList(userId?: number): Promise<Post[]> {
   let posts: Post[] = [];
   try {
     const response = await fetch(
