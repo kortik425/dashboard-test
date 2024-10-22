@@ -33,3 +33,19 @@ export async function fetchPostList(userId?: number): Promise<Post[]> {
   }
   return posts;
 }
+
+export async function fetchPost(postId: number): Promise<Post> {
+  let post = null;
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${postId}`
+    );
+    if (!response.ok) {
+      throw new Error(`Error: Failed to fetch post with ID ${postId}`);
+    }
+    post = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+  return post;
+}
