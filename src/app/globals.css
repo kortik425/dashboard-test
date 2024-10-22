@@ -47,6 +47,24 @@ body {
   }
 }
 
+@layer components {
+  table {
+    border-collapse: separate;
+    border-spacing: 0 12px;
+  }
+  :is(td, th) {
+    @apply p-4
+  }
+  tr td:first-of-type {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
+  tr td:last-of-type {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+}
+
 @layer utilities {
   .with-shadow {
     filter: drop-shadow(4px 0px 4px rgba(0, 0, 0, 0.25));
