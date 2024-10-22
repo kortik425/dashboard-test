@@ -20,10 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
-      <body className={`antialiased ${spaceGrotesk.className} flex`}>
+    <html lang="en">
+      <body
+        className={`antialiased ${spaceGrotesk.className} md:flex overflow-x-hidden`}
+      >
         <Sidebar />
-        <main className="mt-24 md:mt-4">{children}</main>
+        <main className="mt-24 md:mt-4 flex-1 m-4 md:ml-0">{children}</main>
       </body>
     </html>
   );
