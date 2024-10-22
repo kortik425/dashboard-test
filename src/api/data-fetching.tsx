@@ -1,5 +1,5 @@
-import { User } from "../app/interfaces/user";
-import { Post } from "../app/interfaces/post";
+import { User } from "../interfaces/user";
+import { Post } from "../interfaces/post";
 
 export async function getUserList(): Promise<User[]> {
   let users: User[] = [];
