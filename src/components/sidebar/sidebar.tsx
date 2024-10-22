@@ -17,8 +17,9 @@ const links = [
 ];
 
 const Navbar = ({}) => {
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(true); // desktop: true=open, mobile: true=close
   const handleToggler = () => setToggle((prev) => !prev);
+  const spacing = "max-w-80 w-[100%] m-4";
   return (
     <>
       <button
@@ -29,7 +30,7 @@ const Navbar = ({}) => {
         <BiMenu size={32} className="m-2" />
       </button>
       <aside
-        className={`bg-gray-900 max-w-80 w-[100%] rounded-2xl m-4 fixed top-0 bottom-0 transition-all ${toggle ? "-left-full md:left-0" : "left-0 md:-left-full"}`}
+        className={`bg-gray-900 ${spacing} rounded-2xl fixed top-0 bottom-0 transition-all ${toggle ? "-left-full md:left-0" : "left-0 md:-left-full"}`}
       >
         <header className="mx-6 my-6 flex justify-between">
           <h2>MyBrand Here</h2>
@@ -48,7 +49,7 @@ const Navbar = ({}) => {
               <li key={link.id}>
                 <Link
                   href={link.url}
-                  className="p-4 stylised-p-500 rounded-lg hover:bg-orange-500 flex m-2 gap-2 items-center"
+                  className="p-4 stylised-p-500 rounded-lg hover:bg-sky-700 flex m-2 gap-2 items-center"
                 >
                   <Icon size={20} title={`${link.id} icon`} />
                   {link.label}
@@ -60,7 +61,7 @@ const Navbar = ({}) => {
       </aside>
       <div
         aria-hidden
-        className={`block w-4 ${toggle ? "md:w-96" : "md:w-24"} transition-all relative h-1`}
+        className={`${toggle ? `${spacing}` : "m-4 md:w-16"} transition-all h-1`}
       />
     </>
   );
