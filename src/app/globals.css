@@ -53,7 +53,7 @@ body {
     border-spacing: 0 12px;
   }
   :is(td, th) {
-    @apply p-4
+    @apply p-4;
   }
   tr td:first-of-type {
     border-top-left-radius: 0.5rem;
