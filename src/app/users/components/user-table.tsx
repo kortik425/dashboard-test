@@ -14,10 +14,7 @@ import ActionsColumn from "./actions-column";
 import { User } from "@/interfaces/user";
 import { useDataContext } from "@/context/data-context";
 import useDeviceSize from "@/utils/hooks/useDeviceSize";
-
-interface UserTableProps {
-  filters?: string;
-}
+import { useSearch } from "@/context/search-context";
 
 const columnHelper = createColumnHelper<User>();
 
@@ -69,10 +66,11 @@ const customFilterFn = (
   return search;
 };
 
-const UserTable: React.FC<UserTableProps> = ({ filters }) => {
+const UserTable: React.FC = () => {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 7 });
   const { usersList } = useDataContext();
   const { isMobile } = useDeviceSize();
+  const { filters } = useSearch();
 
   const userTable = useReactTable({
     data: usersList as User[],

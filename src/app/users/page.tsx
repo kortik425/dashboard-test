@@ -4,17 +4,18 @@ import PostList from "./components/post-list";
 import SearchBar from "./components/searchbar";
 import { ModalProvider } from "@/context/modal-context";
 import AddPostModal from "./components/add-post-modal";
+import { SearchFiltersProvider } from "@/context/search-context";
 
 const Users: React.FC = ({}) => {
   return (
-    <>
-      <SearchBar />
-      <ModalProvider>
+    <ModalProvider>
+      <SearchFiltersProvider>
+        <SearchBar />
         <UserTable />
-        <PostList />
-        <AddPostModal />
-      </ModalProvider>
-    </>
+      </SearchFiltersProvider>
+      <PostList />
+      <AddPostModal />
+    </ModalProvider>
   );
 };
 
