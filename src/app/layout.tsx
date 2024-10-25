@@ -25,7 +25,10 @@ export default function RootLayout({
         className={`antialiased ${spaceGrotesk.className} md:flex overflow-x-hidden`}
       >
         <Sidebar />
-        <main className="mt-24 md:mt-4 flex-1 m-4 md:ml-0">{children}</main>
+        <main className="mt-24 md:mt-4 flex-1 m-4 md:ml-0">
+          {children}
+          <div id="modal-root" />
+        </main>
       </body>
     </html>
   );

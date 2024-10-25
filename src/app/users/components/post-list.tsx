@@ -4,15 +4,17 @@ import { BiX } from "react-icons/bi";
 
 import { Card } from "@/components/UI";
 import { useDataContext } from "@/context/data-context";
+import { useRouter } from "next/navigation";
 
 const PostList: React.FC = () => {
-  const { postList, getPost, setUid } = useDataContext();
+  const { postList, setPostId, setUid } = useDataContext();
+  const router = useRouter();
 
   const showPost = (e: React.MouseEvent, postId: number) => {
-    getPost(postId);
+    router.push(`/posts/${postId}`);
+    setPostId(postId);
   };
   const isEmpty = postList.length === 0;
-  console.log(isEmpty);
   return (
     <section
       className={`bg-gray-900 rounded-2xl fixed top-0 bottom-0 max-w-96 m-4 overflow-y-auto transition-all ${isEmpty ? "-right-full" : "right-0"}`}
