@@ -12,9 +12,9 @@ import { TableHeader, TableRow } from "@/components/table";
 import { TextInput } from "@/components/UI";
 import ActionsColumn from "./actions-column";
 import { User } from "@/interfaces/user";
+import { useDataContext } from "@/context/data-context";
 
 interface UserTableProps {
-  usersList: User[];
   filters?: string;
 }
 
@@ -51,8 +51,9 @@ const customFilterFn = (
   return search;
 };
 
-const UserTable: React.FC<UserTableProps> = ({ usersList, filters }) => {
+const UserTable: React.FC<UserTableProps> = ({ filters }) => {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 7 });
+  const { usersList } = useDataContext();
   const userTable = useReactTable({
     data: usersList as User[],
     columns,
