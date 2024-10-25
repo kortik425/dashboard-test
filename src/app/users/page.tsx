@@ -3,7 +3,7 @@ import UserTable from "./components/user-table";
 import PostList from "./components/post-list";
 import SearchBar from "./components/searchbar";
 import { ModalProvider } from "@/context/modal-context";
-import AddPostModal from "./components/add-post-content";
+import AddPostModal from "./components/add-post-modal";
 
 const Users: React.FC = ({}) => {
   return (

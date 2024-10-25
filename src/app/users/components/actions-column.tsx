@@ -4,7 +4,7 @@ import { Tooltip } from "@/components/UI";
 import { useDataContext } from "@/context/data-context";
 import Link from "next/link";
 import { useModal } from "@/context/modal-context";
-import { MODAL_ID } from "./add-post-content";
+import { MODAL_ID } from "./add-post-modal";
 
 interface ActionsColumnProps {
   userId: number;
