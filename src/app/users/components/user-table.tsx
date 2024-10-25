@@ -91,11 +91,7 @@ const UserTable: React.FC<UserTableProps> = ({ filters }) => {
         <TableHeader headerGroups={userTable.getHeaderGroups()} />
         <tbody>
           {userTable.getRowModel().rows.map((row) => (
-            <TableRow
-              key={row.id}
-              row={row}
-              // isSelected={row.original.id == user?.id}
-            />
+            <TableRow key={row.id} row={row} />
           ))}
         </tbody>
       </table>
