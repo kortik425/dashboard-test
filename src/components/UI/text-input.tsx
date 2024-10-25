@@ -59,7 +59,7 @@ const TextInput: React.FC<TextInputProps> = ({
           id={textId}
           type={type}
           placeholder={rest.placeholder || label}
-          className="flex-grow border-none outline-none m-2"
+          className="flex-grow border-none outline-none m-2 text-black"
         />
         {children && children}
       </div>
