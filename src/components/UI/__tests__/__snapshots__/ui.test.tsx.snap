@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput renders text input with Label 1`] = `
+<div>
+  <div
+    aria-hidden="true"
+  >
+    <label
+      class="stilised-p-500 pl-2"
+      for=":r0:"
+    >
+      Label
+    </label>
+    <div
+      aria-hidden="true"
+      class="flex h-10 pl-2 rounded-lg bg-white max-w-[100%] border border-black transition duration-150 ease-in-out focus-within:ring-2 focus-within:ring-blue-500 items-center"
+    >
+      <input
+        class="flex-grow border-none outline-none m-2"
+        id=":r0:"
+        placeholder="Label"
+        type="text"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TextInput renders text input without Label 1`] = `
+<div>
+  <div
+    aria-hidden="true"
+  >
+    <label
+      class="sr-only"
+      for=":r1:"
+    >
+      Label
+    </label>
+    <div
+      aria-hidden="true"
+      class="flex h-10 pl-2 rounded-lg bg-white max-w-[100%] border border-black transition duration-150 ease-in-out focus-within:ring-2 focus-within:ring-blue-500 items-center"
+    >
+      <input
+        class="flex-grow border-none outline-none m-2"
+        id=":r1:"
+        placeholder="Label"
+        type="text"
+      />
+    </div>
+  </div>
+</div>
+`;
