@@ -15,6 +15,7 @@ interface DataContextType {
   usersList: User[];
   postList: Post[];
   selectedPost: Post | null;
+  selectedUser: User | null;
   setUid: React.Dispatch<React.SetStateAction<number | null | undefined>>;
   setPostId: React.Dispatch<React.SetStateAction<number | null | undefined>>;
   addNewPost: (requestBody: requestBody) => void;
@@ -36,12 +37,20 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   const [uid, setUid] = useState<number | undefined | null>();
   const [postId, setPostId] = useState<number | undefined | null>();
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const filteredPostList = useCallback(() => {
     if (!uid) return [];
     const filteredList = postList.filter((post: Post) => post.userId === uid);
     return filteredList;
   }, [postList, uid]);
+
+  useEffect(() => {
+    if (uid) {
+      const usr = usersList.find((user: User) => user.id === uid) || null;
+      setSelectedUser(usr);
+    }
+  }, [uid, usersList]);
 
   useEffect(() => {
     if (postId) {
@@ -70,10 +79,11 @@ export const DataProvider: React.FC<DataProviderProps> = ({
       value={{
         postList: filteredPostList(),
         usersList,
+        selectedPost,
+        selectedUser,
         setUid,
         setPostId,
         addNewPost,
-        selectedPost,
       }}
     >
       {children}
