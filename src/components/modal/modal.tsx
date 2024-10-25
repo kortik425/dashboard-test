@@ -1,8 +1,9 @@
 "use client";
 
-import React, { type ElementRef, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
+import { useModal } from "@/context/modal-context";
 
 interface BaseModalProps {
   isModalOpen: boolean;
@@ -35,7 +36,7 @@ type ModalProps =
 const Modal: React.FC<ModalProps> = ({
   children,
   isModalOpen,
-  title = "Title",
+  title = "",
   footer,
   abortFn,
   abortLabel,
@@ -44,7 +45,36 @@ const Modal: React.FC<ModalProps> = ({
   isRouting = false,
 }) => {
   const router = useRouter();
-  const dref = useRef<ElementRef<"dialog">>(null);
+  const { closeModal } = useModal();
+  const dref = useRef<HTMLDialogElement | null>(null);
+
+  const onDismiss = () => {
+    if (isRouting) {
+      router.back();
+    }
+    closeModal();
+    abortFn?.();
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onDismiss();
+      }
+    };
+
+    if (dref.current) {
+      dref.current.addEventListener("keydown", handleKeyDown);
+    }
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      if (dref.current) {
+        dref.current.removeEventListener("keydown", handleKeyDown);
+      }
+    };
+  }, [onDismiss]);
+
   useEffect(() => {
     if (isModalOpen) {
       dref.current?.showModal();
@@ -52,13 +82,6 @@ const Modal: React.FC<ModalProps> = ({
   }, [isModalOpen]);
 
   if (!isModalOpen) return null;
-
-  const onDismiss = () => {
-    if (isRouting) {
-      router.back();
-    }
-    abortFn?.();
-  };
 
   return createPortal(
     <div className="fixed inset-0 z-10 flex items-center justify-center p-9 text-center bg-black bg-opacity-20">
