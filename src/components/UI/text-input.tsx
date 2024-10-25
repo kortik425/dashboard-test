@@ -41,7 +41,7 @@ const TextInput: React.FC<TextInputProps> = ({
   const textId = useId();
 
   return (
-    <div aria-hidden="true" className={containerClassName}>
+    <div aria-hidden="true" className={`${containerClassName} w-full min-w-28`}>
       <label
         htmlFor={textId}
         className={`${isLabelHidden ? "sr-only" : "stilised-p-500 pl-2"}`}
