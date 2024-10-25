@@ -41,6 +41,7 @@ const AddPostModal: React.FC<AddPostModalProps> = ({}) => {
       title="Add new post"
       isModalOpen={modalId === MODAL_ID}
       footer={<CustomModalFooter cancel={closeModal} />}
+      dismissFn={closeModal}
     >
       <form
         onSubmit={handleSubmit}
