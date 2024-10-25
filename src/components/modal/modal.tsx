@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
-import { useModal } from "@/context/modal-context";
 
 interface BaseModalProps {
   isModalOpen: boolean;
@@ -19,19 +18,18 @@ interface ModalPropsWithFooter extends BaseModalProps {
   footer: React.ReactNode;
   abortFn?: never;
   proceedFn?: never;
+  dismissFn: () => void;
 }
 
 interface ModalPropsWithoutFooter extends BaseModalProps {
   footer?: never;
+  dismissFn?: never;
   abortFn?: () => void;
   proceedFn?: () => void;
 }
 
 // Union type for ModalProps with conditional logic
-type ModalProps =
-  | ModalPropsWithFooter
-  | (ModalPropsWithoutFooter &
-      ({ abortFn: () => void } | { proceedFn: () => void }));
+type ModalProps = ModalPropsWithFooter | ModalPropsWithoutFooter;
 
 const Modal: React.FC<ModalProps> = ({
   children,
@@ -43,37 +41,18 @@ const Modal: React.FC<ModalProps> = ({
   proceedFn,
   proceedLabel,
   isRouting = false,
+  dismissFn,
 }) => {
   const router = useRouter();
-  const { closeModal } = useModal();
   const dref = useRef<HTMLDialogElement | null>(null);
 
-  const onDismiss = () => {
+  const onDismiss = useCallback(() => {
     if (isRouting) {
       router.back();
     }
-    closeModal();
     abortFn?.();
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onDismiss();
-      }
-    };
-
-    if (dref.current) {
-      dref.current.addEventListener("keydown", handleKeyDown);
-    }
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      if (dref.current) {
-        dref.current.removeEventListener("keydown", handleKeyDown);
-      }
-    };
-  }, [onDismiss]);
+    dismissFn?.();
+  }, [abortFn, dismissFn, isRouting, router]);
 
   useEffect(() => {
     if (isModalOpen) {
