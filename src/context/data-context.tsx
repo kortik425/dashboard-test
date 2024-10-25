@@ -9,6 +9,7 @@ import {
 import { Post } from "@/interfaces/post";
 import { User } from "@/interfaces/user";
 import { fetchPost } from "@/api/data-fetching";
+import { insertPost, requestBody } from "@/api/data-post";
 
 interface DataContextType {
   usersList: User[];
@@ -16,6 +17,7 @@ interface DataContextType {
   selectedPost: Post | null;
   setUid: React.Dispatch<React.SetStateAction<number | null | undefined>>;
   setPostId: React.Dispatch<React.SetStateAction<number | null | undefined>>;
+  addNewPost: (requestBody: requestBody) => void;
 }
 
 interface DataProviderProps {
@@ -30,7 +32,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   initialState,
 }) => {
   const [usersList] = useState<User[]>(initialState.userList);
-  const [postList] = useState<Post[]>(initialState.postList);
+  const [postList, setPostList] = useState<Post[]>(initialState.postList);
   const [uid, setUid] = useState<number | undefined | null>();
   const [postId, setPostId] = useState<number | undefined | null>();
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
@@ -45,9 +47,6 @@ export const DataProvider: React.FC<DataProviderProps> = ({
     if (postId) {
       const getPost = async () => {
         if (!!postList) {
-          console.log("postlist exist");
-          const pid = postList.find((post) => post.id === postId);
-          console.log("post  ", { pid, postId });
           const post = postList.find((post) => post.id === postId) || null;
           setSelectedPost(post);
         } else {
@@ -59,6 +58,13 @@ export const DataProvider: React.FC<DataProviderProps> = ({
     }
   }, [postId, postList]);
 
+  const addNewPost = async (requestBody: requestBody) => {
+    if (!!uid) {
+      const newPost = await insertPost(requestBody, uid);
+      setPostList((prev) => [...prev, newPost]);
+    }
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -66,6 +72,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
         usersList,
         setUid,
         setPostId,
+        addNewPost,
         selectedPost,
       }}
     >

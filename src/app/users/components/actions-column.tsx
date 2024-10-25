@@ -1,10 +1,10 @@
 import React, { memo, useId } from "react";
-import { BiSolidUserAccount, BiChat } from "react-icons/bi";
+import { BiSolidUserAccount, BiChat, BiCommentAdd } from "react-icons/bi";
 import { Tooltip } from "@/components/UI";
 import { useDataContext } from "@/context/data-context";
 import Link from "next/link";
-
-// import { useModal } from "@/contexts/modals";
+import { useModal } from "@/context/modal-context";
+import { MODAL_ID } from "./add-post-content";
 
 interface ActionsColumnProps {
   userId: number;
@@ -14,10 +14,22 @@ const ActionsColumn: React.FC<ActionsColumnProps> = ({ userId }) => {
   const postButtonTooltipId = useId();
   const userButtonTooltipId = useId();
   const { setUid } = useDataContext();
+  const { openModal } = useModal();
+
+  const handleNewPost = () => {
+    console.log("enter");
+    openModal(MODAL_ID);
+    setUid(userId);
+  };
 
   return (
     <>
       <div className="flex gap-2">
+        <button onClick={handleNewPost} aria-describedby={postButtonTooltipId}>
+          <Tooltip tooltipId={postButtonTooltipId} text="Add Post for user">
+            <BiCommentAdd size={24} />
+          </Tooltip>
+        </button>
         <button
           onClick={() => setUid(userId)}
           aria-describedby={postButtonTooltipId}
