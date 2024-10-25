@@ -61,9 +61,9 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return createPortal(
-    <div className="absolute inset-0 z-10 flex items-center justify-center p-9 text-center bg-black bg-opacity-20">
+    <div className="fixed inset-0 z-10 flex items-center justify-center p-9 text-center bg-black bg-opacity-20">
       <dialog
-        className="relative min-w-[800px] max-w-lg bg-white rounded-2xl shadow-xl"
+        className="relative max-w-lg bg-white rounded-2xl shadow-xl"
         onClose={onDismiss}
         ref={dref}
       >
