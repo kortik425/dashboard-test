@@ -1,7 +1,7 @@
 "use client";
 import { useDataContext } from "@/context/data-context";
 import React from "react";
-import { Modal } from "../../modal";
+import Modal from "@/components/modal/modal";
 
 interface PostProps {
   // define your props here
@@ -9,10 +9,14 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({}) => {
   const { selectedPost } = useDataContext();
-
+  console.log(selectedPost);
   return (
-    <Modal>
-      <h1 className="page-heading">{selectedPost?.title}</h1>
+    <Modal
+      title={selectedPost?.title}
+      isModalOpen={true}
+      abortFn={() => {}}
+      isRouting
+    >
       <p>{selectedPost?.body || "Entra"}</p>
     </Modal>
   );
