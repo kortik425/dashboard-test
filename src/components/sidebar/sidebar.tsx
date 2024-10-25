@@ -9,6 +9,7 @@ import {
   BiMenu,
   BiHorizontalLeft,
 } from "react-icons/bi";
+import useDeviceSize from "@/utils/hooks/useDeviceSize";
 
 const links = [
   { id: "home", url: "/", label: "Home", icon: BiHomeAlt },
@@ -18,8 +19,9 @@ const links = [
 
 const Navbar = ({}) => {
   const [toggle, setToggle] = useState(true); // desktop: true=open, mobile: true=close
+  const { isMobile } = useDeviceSize();
   const handleToggler = () => setToggle((prev) => !prev);
-  const spacing = "max-w-80 w-[100%] m-4";
+  const spacing = "max-w-80 w-full m-4";
   return (
     <>
       <button
@@ -48,6 +50,7 @@ const Navbar = ({}) => {
             return (
               <li key={link.id}>
                 <Link
+                  onClick={isMobile ? handleToggler : () => {}}
                   href={link.url}
                   className="p-4 stylised-p-500 rounded-lg hover:bg-sky-700 flex m-2 gap-2 items-center"
                 >

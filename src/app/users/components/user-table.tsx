@@ -13,6 +13,7 @@ import { TextInput } from "@/components/UI";
 import ActionsColumn from "./actions-column";
 import { User } from "@/interfaces/user";
 import { useDataContext } from "@/context/data-context";
+import useDeviceSize from "@/utils/hooks/useDeviceSize";
 
 interface UserTableProps {
   filters?: string;
@@ -40,6 +41,23 @@ const columns = [
   }),
 ];
 
+const mobileColumns = [
+  columnHelper.accessor("username", {
+    header: "User",
+    cell: (info) => (
+      <div>
+        <div>{info.getValue()}</div>
+        <div>{info.row.original.email}</div>
+      </div>
+    ),
+  }),
+  columnHelper.display({
+    id: "actions",
+    header: () => <p>Actions</p>,
+    cell: (props) => <ActionsColumn userId={props.row.original.id} />,
+  }),
+];
+
 const customFilterFn = (
   row: Row<User>,
   _columnId: string,
@@ -54,9 +72,11 @@ const customFilterFn = (
 const UserTable: React.FC<UserTableProps> = ({ filters }) => {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 7 });
   const { usersList } = useDataContext();
+  const { isMobile } = useDeviceSize();
+
   const userTable = useReactTable({
     data: usersList as User[],
-    columns,
+    columns: isMobile ? mobileColumns : columns,
     state: { pagination, globalFilter: filters },
     globalFilterFn: customFilterFn,
     getCoreRowModel: getCoreRowModel(),
