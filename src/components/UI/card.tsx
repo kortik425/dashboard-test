@@ -3,7 +3,8 @@ import React from "react";
 interface CardProps {
   title: string;
   content?: string;
-  className: string;
+  className?: string;
+  children?: React.ReactNode;
   onClick?: (e: React.MouseEvent) => void;
 }
 
@@ -13,7 +14,13 @@ interface CardContainerProps {
   onClick?: (e: React.MouseEvent) => void;
 }
 
-const Card: React.FC<CardProps> = ({ title, content, className, ...rest }) => {
+const Card: React.FC<CardProps> = ({
+  title,
+  content,
+  className,
+  children,
+  ...rest
+}) => {
   return (
     <CardContainer
       className={`p-4 w-full h-[148px] bg-sky-600 rounded-2xl text-left ${className}`}
@@ -21,6 +28,7 @@ const Card: React.FC<CardProps> = ({ title, content, className, ...rest }) => {
     >
       <h3>{title}</h3>
       {content && <p>{content}</p>}
+      {children && children}
     </CardContainer>
   );
 };

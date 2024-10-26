@@ -32,7 +32,7 @@ const Navbar = ({}) => {
         <BiMenu size={32} className="m-2" />
       </button>
       <aside
-        className={`bg-gray-900 ${spacing} z-50 rounded-2xl fixed top-0 bottom-0 transition-all ${toggle ? "-left-full md:left-0" : "left-0 md:-left-full"}`}
+        className={`bg-sky-950 ${spacing} z-50 rounded-2xl fixed top-0 bottom-0 transition-all ${toggle ? "-left-full md:left-0" : "left-0 md:-left-full"}`}
       >
         <header className="mx-6 my-6 flex justify-between">
           <h2>MyBrand Here</h2>
