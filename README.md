@@ -1,36 +1,84 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+![Deployment: ](https://github.com/kortik425/dashboard-test/actions/workflows/deploy.yml/badge.svg?event=push)
+
+It is a web application built with Next.js (using the App Directory way), React, TypeScript, and Tailwind CSS and deployed in Vercel through a simple CI/CD Github workflow.
+
+It fetches and displays data from the JSONPlaceholder API, specifically the /users and /posts endpoints, showcasing proficiency in frontend development, state management, and UI/UX design.
+
+This is an updated version of [dashboard project](https://github.com/kortik425/dashboard), created to improve on the structure, design and functionality. While the dashboard project provide with the bare minimum necessities of the task proposed, this project addresses enhancements like intercept routes to further showcase my ability to improve on a given project.
+
 ## Getting Started
 
-First, run the development server:
+Install and run the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm i
+npm run dev 
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3300](http://localhost:3300) with your browser to see the result. (It was changed from port 3000 as I was using it for something else) 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## File structure
 
-## Learn More
+From the `src` folder the structure of the project has the default `app` folder, and the following folders:
+ - `components` folder  
+ - `context` folder, 
+ - `api` folder,
+ - `interfaces` folder,
+ - `utils` folder
+ 
+The components are placed in three different locations based on their scope:   
+For very specific components with low reusability a component folder is placed inside the page folder to be used within its immediate context.  
+Complex but reusable components are placed inside the `/components` folder  
+Blocks of UI components such as text input are placed in the `UI` folder within the components folder
 
-To learn more about Next.js, take a look at the following resources:
+Here is a visual rapresentation of the structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+│
+├─ api/                         # All the api calls
+│
+├── app/                       # Default app folder for Next.js pages and layouts
+│
+├── components/                # Folder for reusable and UI components
+│   ├── UI/                    # Basic UI elements (e.g., TextInput, Button) for broad reuse
+│   └── [ComponentName]/       # Reusable complex components with multiple parts and logic
+│
+├── context/                   # Folder for Context API files to manage app-wide state
+│
+├── utils/                     # Custom functions and custom hooks folder
+│      ├─ hooks/
+│     
+├── interfaces/                # TypeScript interfaces for type consistency across components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
 
-## Deploy on Vercel
+Types and interfaces are generally kept in their own folders and are put into the interfaces folders if reused over multiple components.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## State Management
+The project state is managed through the use of Context API. We have 3 context that handle:
+- The data management
+- The Modals
+- The searchbar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Since we are using NextJS we have leveraged the use of React Server Components (RSC) for the data handling since NextJS cache the data after the requests I can reuse the same api call to get a cached version of the API call and pass it down through props to the client components
+
+With a growing project the use of Tanstack React Query could be a good idea to handle the api calls in the client side components.
+
+## CI/CD
+This Repository runs 2 workflows using Github Actions:
+1. Deployment of the code to Vercel
+2. Running tests for PR pointed to main
+
+## Parallel and Intercept routes
+This project make use of Parallel and intercept routes for when visualising the `Post` and the `User` This means that when the modal open the app navigate to the actual route on top of where the route actually was. This allow the url to be sharable and it is showed when opening a user and trying to reload the page.
+
+## What to improve
+Although it has been improved from the first iteration, responsiveness can be further improved.  
+Depending on the complexity of the project moving to Redux could be a good idea to centralize the client state and   handle API calls and caching in the same place through RTK Query.  
+Test coverage can be improved
+
+
