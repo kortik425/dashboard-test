@@ -17,7 +17,8 @@ npm i
 npm run dev 
 ```
 
-Open [http://localhost:3300](http://localhost:3300) with your browser to see the result. (It was changed from port 3000 as I was using it for something else) 
+Open [http://localhost:3300](http://localhost:3300) with your browser to see the result. (It was changed from port 3000 as I was using it for something else)   
+Or test it out here https://dashboard-test-ejvo6exbz-gian-carlo-bandrils-projects.vercel.app/
 
 
 ## File structure
