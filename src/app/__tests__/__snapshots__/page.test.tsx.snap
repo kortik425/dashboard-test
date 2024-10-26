@@ -2,12 +2,6 @@
 
 exports[`renders homepage unchanged 1`] = `
 <div>
-  <main
-    class="ml-[24rem]"
-  >
-    <h1>
-      Header
-    </h1>
-  </main>
+  <main />
 </div>
 `;

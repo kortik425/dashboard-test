@@ -4,6 +4,7 @@ exports[`TextInput renders text input with Label 1`] = `
 <div>
   <div
     aria-hidden="true"
+    class="undefined w-full min-w-28"
   >
     <label
       class="stilised-p-500 pl-2"
@@ -16,7 +17,7 @@ exports[`TextInput renders text input with Label 1`] = `
       class="flex h-10 pl-2 rounded-lg bg-white max-w-[100%] border border-black transition duration-150 ease-in-out focus-within:ring-2 focus-within:ring-blue-500 items-center"
     >
       <input
-        class="flex-grow border-none outline-none m-2"
+        class="flex-grow border-none outline-none m-2 text-black"
         id=":r0:"
         placeholder="Label"
         type="text"
@@ -30,6 +31,7 @@ exports[`TextInput renders text input without Label 1`] = `
 <div>
   <div
     aria-hidden="true"
+    class="undefined w-full min-w-28"
   >
     <label
       class="sr-only"
@@ -42,7 +44,7 @@ exports[`TextInput renders text input without Label 1`] = `
       class="flex h-10 pl-2 rounded-lg bg-white max-w-[100%] border border-black transition duration-150 ease-in-out focus-within:ring-2 focus-within:ring-blue-500 items-center"
     >
       <input
-        class="flex-grow border-none outline-none m-2"
+        class="flex-grow border-none outline-none m-2 text-black"
         id=":r1:"
         placeholder="Label"
         type="text"
